@@ -32,7 +32,7 @@ class NavBar extends React.Component {
     }
     render() {
         return (
-            <Navbar expand='lg' className='blue darken-3' onToggle={this.handleToggle}>
+            <Navbar expand='lg' className='portfolio-navbar' onToggle={this.handleToggle}>
                 <Container className='navbar-container'>
                     <Navbar.Brand as={Link} to='/' className='navbar-brand'>Marco Maigua</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={this.handleToggle} />

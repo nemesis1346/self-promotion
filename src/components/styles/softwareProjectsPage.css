@@ -1,15 +1,61 @@
+/* ─── Software Projects Page ───────────────────────────────── */
+
 .software-projects-page-container {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    padding: 20px;
+  padding: 100px 24px 60px !important;
+  min-height: 100vh;
+  max-width: 1200px !important;
 }
 
+/* ── Page heading (if added later) ── */
+.software-projects-page-container h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
+/* ── Card grid ── */
+.app-card-list {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
-@media (max-width: 768px) {
-    .app-card-list {
-        margin-top: auto !important;
-    }
+/* Each col is a grid cell */
+.app-card-list .col {
+  padding: 0 !important;
+  width: auto !important;
+  flex: none !important;
+}
 
+/* Staggered card animation */
+.app-card-list .col:nth-child(1) .post.card { animation-delay: 0.05s; }
+.app-card-list .col:nth-child(2) .post.card { animation-delay: 0.10s; }
+.app-card-list .col:nth-child(3) .post.card { animation-delay: 0.15s; }
+.app-card-list .col:nth-child(4) .post.card { animation-delay: 0.20s; }
+.app-card-list .col:nth-child(5) .post.card { animation-delay: 0.25s; }
+.app-card-list .col:nth-child(6) .post.card { animation-delay: 0.30s; }
+
+/* ── Responsive ── */
+@media (max-width: 992px) {
+  .app-card-list {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .software-projects-page-container {
+    padding: 90px 12px 40px !important;
+  }
+
+  .app-card-list {
+    grid-template-columns: 1fr;
+    gap: 16px !important;
+  }
 }

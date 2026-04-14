@@ -1,17 +1,11 @@
-version: '3.8'
-
 services:
 
   front-end-react:
     build:
-      context: ./front-end-react
+      context: .
       dockerfile: Dockerfile
-    command: npm start -- --host 0.0.0.0
     volumes:
-      - ./front-end-react:/app
+      - .:/app
       - /app/node_modules
     ports:
       - "8080:8080"
-
-volumes:
-  postgres_data:

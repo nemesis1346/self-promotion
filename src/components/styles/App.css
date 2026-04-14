@@ -1,23 +1,74 @@
+/* ─── App Shell ─────────────────────────────────────────────── */
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-primary);
+  position: relative;
+  z-index: 1;
 }
 
+/* ─── Main content area ─────────────────────────────────────── */
 .main-content {
   flex: 1;
-  transition: margin-top 0.3s ease;
+  transition: margin-top var(--transition-med);
+  position: relative;
+  z-index: 1;
 }
 
+/* ─── Ambient glow orbs in background ──────────────────────── */
+.App::before {
+  content: '';
+  position: fixed;
+  top: -20vh;
+  left: -15vw;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.App::after {
+  content: '';
+  position: fixed;
+  bottom: -20vh;
+  right: -10vw;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Bootstrap & Materialize overrides ────────────────────── */
+.container,
+.container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+/* Override Bootstrap's default white background on alerts */
+.alert-danger {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  color: #fc8181 !important;
+  border-radius: var(--radius-md) !important;
+}
+
+/* Spinner glow */
+.spinner-border {
+  color: var(--accent-cyan) !important;
+  filter: drop-shadow(0 0 8px var(--accent-cyan));
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .main-content {
     padding-top: 0 !important;
-    /* Remove top padding on mobile */
   }
 
   .navbar-collapse {
     justify-content: center;
-
   }
 }
-

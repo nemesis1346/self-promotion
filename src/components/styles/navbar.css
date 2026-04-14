@@ -1,59 +1,165 @@
-/* navbar.css */
+/* ─── Navbar — Glassmorphism ─────────────────────────────────── */
 
-.navbar-container{
-  background-color: #1565C0 !important; 
-  padding: 0px!important;
-  position: fixed;
-  z-index: 1030;
-  margin: 0px!important;
-  width:100%;
-  display:flex!important;
-  max-width: none!important;
-}
-.navbar-container.container{
-  width:100%!important;
-}
-/* Ensure navbar-collapse takes full width but keeps flex behavior */
-.navbar-collapse {
-  justify-content: center!important;
-}
-
+/* The Bootstrap Navbar root */
 .navbar {
-   padding: 0px;
-   position: relative;
-}
-.navbar-brand{
-  margin: 0px!important;
-  padding: 0px!important;
-  padding-left: 3%!important;
+  padding: 0 !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1030;
+  background: rgba(5, 5, 10, 0.8) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 40px rgba(0, 0, 0, 0.5);
+  transition: background var(--transition-med), box-shadow var(--transition-med);
 }
 
-.nav-link{
-  padding: 0px;
-  display: flex;           /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center;  
+/* Override Materialize / Bootstrap blue */
+.navbar.blue,
+.navbar.darken-3,
+.navbar.blue.darken-3 {
+  background: rgba(5, 5, 10, 0.8) !important;
 }
+
+/* ─── Inner container ───────────────────────────────────────── */
+.navbar-container {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  display: flex !important;
+  align-items: center;
+  padding: 0 24px !important;
+  min-height: 60px;
+}
+
+.navbar-container.container {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* ─── Brand ─────────────────────────────────────────────────── */
 .navbar-brand {
-  color: white !important; /* Use !important to ensure it overrides default styles */
-}
-.navbar-nav .nav-link {
-  color: white !important; /* Use !important to ensure it overrides default styles */
+  margin: 0 !important;
+  padding: 8px 0 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  background: var(--gradient-brand) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  transition: filter var(--transition-fast);
 }
 
-.navbar-toggler {
-  border-color:#1565C0 !important; 
+.navbar-brand:hover {
+  filter: brightness(1.2);
 }
-@media (max-width: 768px) {
+
+/* ─── Nav links ─────────────────────────────────────────────── */
+.navbar-nav .nav-link {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 8px 16px !important;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: color var(--transition-fast) !important;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: var(--gradient-brand);
+  border-radius: var(--radius-full);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-med);
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--text-primary) !important;
+}
+
+.navbar-nav .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--accent-cyan) !important;
+}
+
+.navbar-nav .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* ─── Toggler (hamburger) ───────────────────────────────────── */
+.navbar-toggler {
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 6px 10px !important;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast) !important;
+}
+
+.navbar-toggler:hover {
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3) !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.25) !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,212,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* ─── Collapse panel (mobile) ───────────────────────────────── */
+.navbar-collapse {
+  justify-content: flex-end !important;
+}
+
+/* ─── Mobile styles ─────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .navbar-container {
+    position: static !important;
+    width: 100% !important;
+  }
+
+  .navbar-collapse.show {
+    background: rgba(5, 5, 10, 0.97);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-subtle);
+    padding: 12px 0 20px;
+  }
+
   .navbar-nav {
-      flex-direction: column; /* Stack links vertically */
-      text-align: center; /* Center align text */
+    flex-direction: column !important;
+    align-items: center;
   }
-  .navbar-container{
-    width: 100%;
-    position: static;
+
+  .navbar-nav .nav-link {
+    padding: 12px 24px !important;
+    font-size: 0.9rem !important;
   }
-  .navbar-collapse {
-    justify-content: center; /* Push items to the right */
+
+  .navbar-nav .nav-link::after {
+    left: 24px;
+    right: 24px;
+    bottom: 6px;
   }
 }

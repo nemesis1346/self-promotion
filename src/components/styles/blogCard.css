@@ -1,24 +1,130 @@
-/* homePage.css */
+/* ─── Blog Card — Dark Glass ────────────────────────────────── */
 
-/* Flexbox layout to ensure alignment */
-.blog-card-container {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  padding: 20px;
+.post.card {
+  display: flex !important;
+  flex-direction: column !important;
+  float: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.card {
-  display: inline-block;
-  float: left;
-
-  .card-body {
-    white-space: normal;
-  }
+.post.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 212, 255, 0.35) !important;
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(0, 212, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-img {
-  float: left;
+/* ── Image container ── */
+.img-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.img-container a {
+  display: block;
   width: 100%;
   height: 100%;
+}
+
+.img-container img,
+img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  display: block;
+  float: none !important;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: brightness(0.85) saturate(0.9);
+}
+
+.post.card:hover .img-container img {
+  transform: scale(1.04);
+  filter: brightness(1) saturate(1.05);
+}
+
+/* ── Card body ── */
+.card-body {
+  padding: 20px 22px 22px !important;
+  white-space: normal;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Date badge */
+.card-body > p:first-of-type {
+  font-family: var(--font-mono) !important;
+  font-size: 0.72rem !important;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan) !important;
+  margin: 0 !important;
+  opacity: 0.8;
+}
+
+/* Title */
+.card-body h2 {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  margin: 4px 0 10px !important;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Read more button ── */
+.card-body a[href] i.btn,
+.card-body a[href] > i {
+  display: inline-flex !important;
+  align-items: center;
+  padding: 6px 18px !important;
+  font-style: normal !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm) !important;
+  border: 1px solid rgba(0, 255, 135, 0.25) !important;
+  background: transparent !important;
+  color: var(--accent-mint) !important;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  margin-top: auto !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+}
+
+.card-body a[href] i.btn:hover,
+.card-body a[href] > i:hover {
+  background: rgba(0, 255, 135, 0.1) !important;
+  border-color: var(--accent-mint) !important;
+  box-shadow: 0 0 14px rgba(0, 255, 135, 0.25) !important;
 }

@@ -21,16 +21,28 @@ Make sure to use the specified versions below when working within Docker contain
 ---
 
 ## 🛠 Installation Steps  
-Simply run the following command to build and start the project:  
+
+1. From the project root, build and start the container:
 ```bash
 docker compose up --build
 ```
 
+2. Wait for the output line:
+```
+Compiled successfully!
+```
+
+3. Open your browser at:
+```
+http://localhost:8080
+```
+
+> **Note:** On subsequent runs you can skip `--build` and just use `docker compose up`.
+
 ---
 
 ## 🌐 Deployment on GitHub Pages  
-1. Navigate to the **`front-end-react/`** folder.  
-2. Run the following commands:  
+1. From the project root, run:  
 
 ```bash
 npm run build

@@ -1,82 +1,224 @@
-/* homePage.css */
+/* ─── Home Page — Hero ──────────────────────────────────────── */
 
-/* Flexbox layout to ensure alignment */
+/* ── Keyframes ── */
+@keyframes profileGlow {
+  0%   { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 60px rgba(124, 58, 237, 0.2); }
+  50%  { box-shadow: 0 0 40px rgba(0, 212, 255, 0.7), 0 0 100px rgba(124, 58, 237, 0.4); }
+  100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 60px rgba(124, 58, 237, 0.2); }
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Container ── */
 .home-page-container {
-  height: 100vh;
-  padding: 20px;
+  min-height: 100vh;
+  display: flex !important;
+  align-items: center;
+  padding: 80px 24px 40px;
+  max-width: 1100px !important;
 }
 
-/* Adjust layout for small screens (mobile) */
-@media (max-width: 768px) {
-  .home-page-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-  }
-
-  .left-container {
-    width: 100%;
-  }
-
-  .right-container {
-    width: 100%;
-  }
-
-}
-
-/* Containers */
+/* ── Left — Profile Image ── */
 .left-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  animation: fadeInUp 0.8s ease both;
 }
 
+/* Glowing profile photo wrapper */
+.left-container .img-fluid,
+.left-container img {
+  width: min(280px, 70vw) !important;
+  height: min(280px, 70vw) !important;
+  object-fit: cover;
+  border-radius: 50% !important;
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+    var(--gradient-brand) border-box;
+  animation: profileGlow 4s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Right — Content ── */
 .right-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 20px;
+  align-items: flex-start;
+  padding: 24px 16px 24px 32px;
+  animation: fadeInUp 0.8s 0.15s ease both;
 }
 
-/* Button styling */
-.button-resume {
-  background-color: #007bff;
-  color: white;
-  margin: 5% 5%;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s;
+/* ── Heading ── */
+.right-container h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 0 4px !important;
+  padding: 0 !important;
+  background: var(--gradient-brand);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+  line-height: 1.1;
 }
-h1{
-  margin: 0!important;
-  padding: 0;
+
+/* ── Tagline / mono badge ── */
+.right-container h1 + * {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ── Bio text ── */
+.right-container p {
+  color: var(--text-secondary);
+  font-size: 0.975rem;
+  line-height: 1.8;
+  text-align: left;
+  max-width: 520px;
+  margin: 12px 0;
+}
+
+/* ── CV Resume Button ── */
+.button-resume,
+a.button-resume {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 !important;
+  padding: 11px 28px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bg-primary) !important;
+  background: var(--gradient-brand) !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast) !important;
+  text-decoration: none !important;
+}
+
+.button-resume::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
 }
 
 .button-resume:hover {
-  background-color: #0056b3;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(0, 212, 255, 0.4) !important;
+  color: var(--bg-primary) !important;
 }
 
-/* Social media icons */
+.button-resume:hover::before {
+  opacity: 1;
+}
+
+.button-resume:active {
+  transform: translateY(0) !important;
+}
+
+/* ── Social icons ── */
 .social-media-container {
   display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.social-media-container a {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 15px;
-  margin-top: 15px;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.social-media-container a:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.35);
+  transform: translateY(-3px);
 }
 
 .social-media-container img {
-  width: 40px;
-  height: 40px;
+  width: 22px !important;
+  height: 22px !important;
   object-fit: contain;
-  transition: transform 0.2s;
+  transition: filter var(--transition-fast);
+  filter: brightness(0.85);
 }
 
-.social-media-container img:hover {
-  transform: scale(1.2);
+.social-media-container a:hover img {
+  filter: brightness(1.2);
 }
 
-p{
-  text-align: justify;
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .home-page-container {
+    flex-direction: column !important;
+    padding: 100px 16px 40px;
+    text-align: center;
+  }
+
+  .left-container {
+    width: 100%;
+    padding: 0 0 20px;
+  }
+
+  .right-container {
+    width: 100%;
+    padding: 12px 8px;
+    align-items: center;
+  }
+
+  .right-container p {
+    text-align: center;
+  }
+
+  .social-media-container {
+    justify-content: center;
+  }
 }
