@@ -21,6 +21,22 @@ class App extends Component {
   }
 
 
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  // Reset the pushed-down margin when the viewport grows back to desktop width
+  // (Bootstrap lg breakpoint = 992px, where the burger menu disappears)
+  handleResize = () => {
+    if (window.innerWidth >= 992 && this.state.marginTop > 0) {
+      this.setState({ isNavbarOpen: false, marginTop: 0 });
+    }
+  }
+
   toggleNavbar = () => {
     this.setState((prevState) => ({
       isNavbarOpen: !prevState.isNavbarOpen

@@ -1,6 +1,7 @@
-/* ─── Blog Page ─────────────────────────────────────────────── */
+/* ─── Blog Page & Web Design Page ──────────────────────────── */
 
-.blog-page-container {
+.blog-page-container,
+.web-design-projects-page-container {
   padding: 100px 24px 60px !important;
   min-height: 100vh;
   max-width: 1200px !important;
@@ -37,7 +38,8 @@
 }
 
 @media (max-width: 576px) {
-  .blog-page-container {
+  .blog-page-container,
+  .web-design-projects-page-container {
     padding: 90px 12px 40px !important;
   }
 
