@@ -42,8 +42,15 @@ http://localhost:8080
 ---
 
 ## 🌐 Deployment on GitHub Pages  
-1. From the project root, run:  
 
+> **Prerequisites:** Deployment runs locally, not inside Docker. You need Node v20 installed on your machine. Check with `node -v` and switch with `nvm use 20` if needed.
+
+1. Install dependencies locally (only needed once, or after adding new packages):
+```bash
+npm install
+```
+
+2. Build and deploy to GitHub Pages:
 ```bash
 npm run build
 npm run deploy
