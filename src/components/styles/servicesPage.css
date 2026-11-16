@@ -203,6 +203,65 @@
 
 .svc-footer { padding: 32px 0 40px; font-size: 0.85rem; color: var(--svc-ink-soft); text-align: center; }
 
+/* ─── Shared app shell ───────────────────────────────────── */
+.App.svc { background: var(--svc-bg); color: var(--svc-ink); }
+.App.svc::before, .App.svc::after { display: none; }
+.App.svc .main-content { margin-top: 0 !important; padding-top: 0 !important; }
+/* Old global rules dim and stretch every img: undo that inside the site */
+.svc img { filter: none !important; float: none !important; }
+.svc .svc-hero-photo img { width: 100% !important; height: 100% !important; }
+.svc .svc-nav > a.is-current { color: var(--svc-accent); text-decoration: underline; text-underline-offset: 6px; }
+
+/* ─── Contact block + form ───────────────────────────────── */
+.svc-contact { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; text-align: left; padding: 48px; }
+.svc-contact-list { margin: 22px 0 14px !important; }
+.svc .svc-contact-list li { display: flex; gap: 12px; align-items: baseline; margin-bottom: 6px; }
+.svc .svc-contact-list span { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--svc-ink-soft); min-width: 86px; }
+.svc .svc-contact-list a { color: var(--svc-ink); font-weight: 600; overflow-wrap: anywhere; }
+.svc-contact .svc-socials { justify-content: flex-start; }
+
+.svc-contact > *, .svc-form-row > * { min-width: 0; }
+.svc-form { background: var(--svc-card); border: 1px solid var(--svc-line); border-radius: var(--svc-radius); padding: 28px; }
+.svc .svc-form h3 { margin-bottom: 1rem; }
+.svc-form-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+.svc .svc-form label { display: block; margin-bottom: 14px; font-size: 0.85rem; font-weight: 600; color: var(--svc-ink); }
+.svc .svc-form label > span { display: block; margin-bottom: 6px; }
+.svc .svc-form input, .svc .svc-form select, .svc .svc-form textarea {
+  width: 100%; display: block; font: inherit; font-size: 0.98rem; font-weight: 400; color: var(--svc-ink);
+  background: #fff; border: 1.5px solid var(--svc-line); border-radius: 10px; padding: 10px 12px; height: auto;
+  margin: 0; box-shadow: none;
+}
+.svc .svc-form textarea { resize: vertical; min-height: 120px; }
+.svc .svc-form input:focus, .svc .svc-form select:focus, .svc .svc-form textarea:focus {
+  outline: none; border-color: var(--svc-accent); box-shadow: 0 0 0 3px var(--svc-accent-soft);
+}
+.svc .svc-form small { display: block; font-weight: 400; color: var(--svc-ink-soft); margin-top: 4px; font-size: 0.8rem; }
+.svc .svc-form button[type=submit] { margin-top: 4px; }
+.svc .svc-form-note { font-size: 0.8rem; margin: 12px 0 0; }
+
+/* ─── Projects / Blog list pages ─────────────────────────── */
+.svc .svc-page-title { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 0.4rem; }
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.svc-item {
+  background: var(--svc-card); border: 1px solid var(--svc-line); border-radius: var(--svc-radius);
+  overflow: hidden; display: flex; flex-direction: column; transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.svc-item:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(43, 38, 34, 0.08); }
+.svc .svc-item-img { display: block; aspect-ratio: 16 / 10; background: var(--svc-panel); overflow: hidden; }
+.svc .svc-item-img img { width: 100% !important; height: 100% !important; object-fit: cover; }
+.svc-item-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+.svc .svc-item-body h3 { font-size: 1.1rem; margin: 0 0 0.5rem !important; }
+.svc .svc-item-body p { font-size: 0.93rem; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+.svc .svc-item-body .svc-when { margin-bottom: 4px; }
+.svc-item-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 6px; }
+.svc .svc-status { text-align: center; padding: 60px 0; font-weight: 600; }
+.svc .svc-status-error { color: #8a3b12; }
+.svc-list-cta {
+  margin-top: 48px; background: var(--svc-panel); border-radius: 24px; padding: 28px 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.svc .svc-list-cta p { margin: 0; font-family: var(--svc-head); font-weight: 700; font-size: 1.2rem; color: var(--svc-ink); }
+
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (max-width: 1080px) {
   .svc-steps { grid-template-columns: repeat(4, 1fr); row-gap: 32px; }
@@ -220,6 +279,8 @@
   .svc-hero-grid, .svc-about-grid, .svc-faq-grid { grid-template-columns: 1fr; gap: 32px; }
   .svc-hero-photo { order: -1; width: 160px; border-radius: 50%; justify-self: start; }
   .svc-cards { grid-template-columns: 1fr; }
+  .svc-contact { grid-template-columns: minmax(0, 1fr); padding: 32px 18px; }
+  .svc-grid { grid-template-columns: repeat(2, 1fr); }
   .svc-section { padding: 52px 0; }
 }
 
@@ -235,4 +296,8 @@
   .svc-step-detail { grid-column: 2 / 4; }
   .svc-section-panel { margin: 0 8px; border-radius: 24px; }
   .svc-card { padding: 22px; }
+  .svc-grid, .svc-form-row { grid-template-columns: minmax(0, 1fr); gap: 0 14px; }
+  .svc-grid { gap: 18px; }
+  .svc-form { padding: 20px; }
+  .svc .svc-contact-list li { flex-direction: column; gap: 0; margin-bottom: 10px; }
 }

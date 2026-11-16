@@ -1,54 +1,38 @@
 import React from 'react';
-import '../styles/projectCard.scss';
-import { connect } from "react-redux";
-import { SPANISH_LANGUAGE, ENGLISH_LANGUAGE } from '../../constants/types';
+import { useLang } from '../../content/LangContext';
 
-class ProjectCard extends React.Component {
+// Project texts come from Firestore in English (and Spanish); the French site shows the English text.
+export default function ProjectCard({ project }) {
+  const { t } = useLang();
+  const title = project.titleEnglish;
+  const text = project.textEnglish;
+  const links = [
+    [project.urlProject, t.pages.seeProject],
+    [project.urlGithub, t.pages.github],
+    [project.urlFile, t.pages.docs],
+    [project.urlExecutable, t.pages.apk],
+  ].filter(([url]) => url && url !== '');
 
-    render() {
-        const { project } = this.props;
-        // console.log(project);
-        let language = this.props.language;
-        let title;
-        let text;
-        switch (language) {
-            case SPANISH_LANGUAGE:
-                title = project.titleSpanish;
-                text = project.textSpanish;
-                break;
-            case ENGLISH_LANGUAGE:
-                title = project.titleEnglish;
-                text = project.textEnglish;
-                break;
-            default:
-                title = project.titleEnglish;
-                text = project.textEnglish;
-                break;
-        }
-
-        return (
-            <div className="post card">
-                <div className="img-container">
-                    <a href={project.urlProject} target="_blank">
-                        <img src={project.imageUrl}></img> </a>
-                </div>
-                <div className="card-body">
-                    <h2>{title}</h2>
-                    <p >{text}</p>
-                    {((project.urlProject) && (project.urlProject != "")) ? <a href={project.urlProject} target="_blank"><i className="waves-effect waves-light btn button-style">See Project</i></a> : null}
-                    {((project.urlGithub) && (project.urlGithub != "")) ? <a href={project.urlGithub} target="_blank"><i className="waves-effect waves-light btn button-style">Github</i></a> : null}
-                    {((project.urlFile) && (project.urlFile != "")) ? <a href={project.urlFile} target="_blank"><i className="waves-effect waves-light btn button-style">Documentation</i></a> : null}
-                    {((project.urlExecutable) && (project.urlExecutable != "")) ? <a href={project.urlExecutable} target="_blank"><i className="waves-effect waves-light btn button-style">Executable(APK)</i></a> : null}
-                </div>
-            </div>
-        )
-    }
+  return (
+    <article className="svc-item">
+      {project.imageUrl && (
+        <a className="svc-item-img" href={project.urlProject || project.urlGithub || undefined} target="_blank" rel="noopener noreferrer">
+          <img src={project.imageUrl} alt={title || ''} loading="lazy" />
+        </a>
+      )}
+      <div className="svc-item-body">
+        <h3>{title}</h3>
+        {text && <p>{text}</p>}
+        {links.length > 0 && (
+          <div className="svc-item-links">
+            {links.map(([url, label], i) => (
+              <a key={label} href={url} target="_blank" rel="noopener noreferrer" className={`svc-btn svc-btn-sm ${i === 0 ? 'svc-btn-dark' : 'svc-btn-ghost'}`}>
+                {label}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  );
 }
-const mapStateToPropsProjectCard = state => {
-    //In this case objects is gonna be applied to the props of the component
-    return {
-        language: state.constantReducer.language
-    };
-};
-
-export default connect(mapStateToPropsProjectCard, null)(ProjectCard);

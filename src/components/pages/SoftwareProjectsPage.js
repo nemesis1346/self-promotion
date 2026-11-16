@@ -1,65 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-    getProjects,
-    getProjectsByDatetime
-} from "../../actions/softwareProjectFirebaseActions"; // Import your actions
+import { getProjectsByDatetime } from "../../actions/softwareProjectFirebaseActions";
 import ProjectCard from '../cards/ProjectCard';
-import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap'; // Import Bootstrap components
-import '../styles/softwareProjectsPage.css';
+import ContentListPage from '../layout/ContentListPage';
+import { useLang } from '../../content/LangContext';
 
-// This page is done for the firebase framework with just links of medium
-class SoftwareProjectsPage extends React.Component {
+function SoftwareProjectsPage({ projects, error, loading, getProjectsByDatetime }) {
+  const { t } = useLang();
+  useEffect(() => {
+    getProjectsByDatetime();
+  }, [getProjectsByDatetime]);
 
-    componentDidMount() {
-        // Fetch projects when the component mounts
-        this.props.getProjectsByDatetime();
-    }
-
-    render() {
-        console.log('PROJECTS');
-        const { projects, error, loading } = this.props;
-
-        return (
-            <Container className="software-projects-page-container">
-                {loading ? (
-                    <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-                        <Spinner animation="border" variant="primary" /> {/* Bootstrap Spinner */}
-                    </div>
-                ) : projects && projects.length > 0 ? (
-                    <Row className="app-card-list" id="app-card-list">
-                        {
-                            Object.keys(projects).map(key => (
-                                <Col key={key}>
-                                    <ProjectCard index={key} project={projects[key]} />
-                                </Col>
-                            ))
-                        }
-                    </Row>
-                ) : (
-                    <Alert variant="danger">
-                        <Alert.Heading>Error</Alert.Heading>
-                        <p>{error || "No projects found."}</p>
-                    </Alert>
-                )}
-            </Container>
-        );
-    }
+  return (
+    <ContentListPage
+      title={t.pages.projectsTitle}
+      subtitle={t.pages.projectsSub}
+      items={projects}
+      loading={loading}
+      error={error}
+      renderItem={(p, i) => <ProjectCard key={p.id || i} project={p} />}
+    />
+  );
 }
 
-const mapStateToPropsSoftwareProjectsPage = state => {
-    // In this case objects are going to be applied to the props of the component
-    return {
-        projects: state.softwareProjectsPageReducer.projects,
-        error: state.softwareProjectsPageReducer.error,
-        loading: state.softwareProjectsPageReducer.loading, 
-    };
-};
+const mapStateToProps = state => ({
+  projects: state.softwareProjectsPageReducer.projects,
+  error: state.softwareProjectsPageReducer.error,
+  loading: state.softwareProjectsPageReducer.loading,
+});
 
-export default connect(
-    mapStateToPropsSoftwareProjectsPage,
-    {
-        getProjects,
-        getProjectsByDatetime
-    }
-)(SoftwareProjectsPage);
+export default connect(mapStateToProps, { getProjectsByDatetime })(SoftwareProjectsPage);

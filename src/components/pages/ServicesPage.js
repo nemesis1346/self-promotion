@@ -1,92 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProfessionalImage } from '../../actions/professionalFirebaseActions';
-import { CONTENT, CONTACT, PRICES_ARE_DRAFT } from '../../content/services';
+import { CONTACT, PRICES_ARE_DRAFT } from '../../content/services';
+import { useLang } from '../../content/LangContext';
+import { scrollToSection } from '../navigation/SiteHeader';
+import ContactForm from './ContactForm';
 import '../styles/servicesPage.css';
 
-const LANG_KEY = 'mm-site-lang';
-
-const initialLang = () => {
-  const saved = window.localStorage.getItem(LANG_KEY);
-  if (saved === 'en' || saved === 'fr') return saved;
-  return (navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en';
-};
-
-// Scroll to a section without changing the URL hash (the app uses HashRouter).
 const goTo = (id) => (e) => {
   e.preventDefault();
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  scrollToSection(id);
 };
 
 function ServicesPage({ photo, getProfessionalImage }) {
-  const [lang, setLang] = useState(initialLang);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLang();
   const [openFaq, setOpenFaq] = useState(null);
-  const t = CONTENT[lang];
+  const location = useLocation();
 
   useEffect(() => {
     getProfessionalImage();
   }, [getProfessionalImage]);
 
+  // Coming from another page through a header link: scroll to the asked section.
   useEffect(() => {
-    window.localStorage.setItem(LANG_KEY, lang);
-    document.documentElement.lang = lang;
-  }, [lang]);
+    const id = location.state && location.state.scrollTo;
+    if (id) setTimeout(() => scrollToSection(id), 50);
+    else window.scrollTo(0, 0);
+  }, [location]);
 
   const priceFor = (key) => t.prices.steps.find((s) => s.key === key);
   const mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent(t.contact.mailSubject)}&body=${encodeURIComponent(t.contact.mailBody)}`;
 
-  const navItems = [
-    ['services', t.nav.services],
-    ['prices', t.nav.prices],
-    ['about', t.nav.about],
-    ['faq', t.nav.faq],
-    ['contact', t.nav.contact],
-  ];
-
   return (
-    <div className="svc">
-      <header className="svc-header">
-        <div className="svc-wrap svc-header-inner">
-          <a href="#top" onClick={goTo('top')} className="svc-brand">
-            <span className="svc-brand-mark">MM</span>
-            <span>Marco Maigua</span>
-          </a>
-          <button
-            className="svc-burger"
-            aria-label="Menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span /><span /><span />
-          </button>
-          <nav className={`svc-nav ${menuOpen ? 'is-open' : ''}`} onClick={() => setMenuOpen(false)}>
-            {navItems.map(([id, label]) => (
-              <a key={id} href={`#${id}`} onClick={goTo(id)}>{label}</a>
-            ))}
-            <Link to="/softwareProjectsPage">{t.nav.projects}</Link>
-            <Link to="/blogFirebasePage">{t.nav.blog}</Link>
-            <div className="svc-lang" role="group" aria-label="Language">
-              {['fr', 'en'].map((l) => (
-                <button
-                  key={l}
-                  className={l === lang ? 'is-active' : ''}
-                  aria-pressed={l === lang}
-                  onClick={(e) => { e.stopPropagation(); setLang(l); }}
-                >
-                  {CONTENT[l].langLabel}
-                </button>
-              ))}
-            </div>
-            <a href="#contact" onClick={goTo('contact')} className="svc-btn svc-btn-dark svc-btn-sm">
-              {t.nav.cta}
-            </a>
-          </nav>
-        </div>
-      </header>
-
+    <div className="svc-page">
       {/* Hero */}
       <section id="top" className="svc-hero">
         <div className="svc-wrap svc-hero-grid">
@@ -219,23 +166,26 @@ function ServicesPage({ photo, getProfessionalImage }) {
       <section id="contact" className="svc-section">
         <div className="svc-wrap">
           <div className="svc-contact">
-            <h2>{t.contact.title}</h2>
-            <p className="svc-sub">{t.contact.subtitle}</p>
-            <a href={mailto} className="svc-btn svc-btn-dark">{t.contact.emailCta}</a>
-            <p className="svc-email">{CONTACT.email}</p>
-            <p className="svc-or">{t.contact.or}</p>
-            <div className="svc-socials">
-              <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href={CONTACT.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-              <a href={CONTACT.medium} target="_blank" rel="noopener noreferrer">Medium</a>
+            <div className="svc-contact-intro">
+              <h2>{t.contact.title}</h2>
+              <p className="svc-sub">{t.contact.subtitle}</p>
+              <a href={mailto} className="svc-btn svc-btn-dark">{t.contact.emailCta}</a>
+              <ul className="svc-contact-list">
+                <li><span>Email</span><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li>
+                <li><span>{t.form.phoneLabel}</span><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></li>
+              </ul>
+              <p className="svc-or">{t.contact.or}</p>
+              <div className="svc-socials">
+                <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href={CONTACT.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href={CONTACT.medium} target="_blank" rel="noopener noreferrer">Medium</a>
+              </div>
             </div>
+            <ContactForm />
           </div>
         </div>
       </section>
 
-      <footer className="svc-footer">
-        <div className="svc-wrap">{t.footer.replace('{year}', new Date().getFullYear())}</div>
-      </footer>
     </div>
   );
 }
