@@ -1,13 +1,23 @@
 import React, { Component, createRef } from "react";
-import { Route, Routes, HashRouter } from "react-router-dom"; // Import Routes
+import { Route, Routes, HashRouter, useLocation } from "react-router-dom"; // Import Routes
 import NavBar from "./components/navigation/NavBar";
 import HomePage from "./components/pages/HomePage";
 import BlogFirebasePage from './components/pages/BlogFirebasePage';
 import SoftwareProjectsPage from './components/pages/SoftwareProjectsPage';
 import WebDesignProjectsPage from './components/pages/WebDesignProjectsPage';
 import AboutMePage from './components/pages/AboutMePage';
+import ServicesPage from './components/pages/ServicesPage';
 import 'materialize-css/dist/css/materialize.min.css';
 import './components/styles/App.css';
+
+// The services page (home) has its own header, so the old navbar is hidden there.
+const SERVICES_PATHS = ["/", "/services"];
+const KNOWN_PATHS = ["/softwareProjectsPage", "/webDesignProjectsPage", "/blogFirebasePage", "/aboutMePage", "/home"];
+function NavBarOutsideServices(props) {
+  const { pathname } = useLocation();
+  const isServices = SERVICES_PATHS.includes(pathname) || !KNOWN_PATHS.includes(pathname);
+  return isServices ? null : <NavBar {...props} />;
+}
 
 class App extends Component {
 
@@ -53,18 +63,20 @@ class App extends Component {
     return (
       <HashRouter>
         <div className="App">
-          <NavBar
+          <NavBarOutsideServices
             isNavbarOpen={this.state.isNavbarOpen}
             onToggle={this.toggleNavbar}
             updateMarginTop={this.updateMarginTop} />
           <main className="main-content" style={{ marginTop: this.state.marginTop }}>
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<ServicesPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/home" element={<HomePage />} />
               <Route path="/softwareProjectsPage" element={<SoftwareProjectsPage />} />
               <Route path="/webDesignProjectsPage" element={<WebDesignProjectsPage />} />
               <Route path="/blogFirebasePage" element={<BlogFirebasePage />} />
               <Route path="/aboutMePage" element={<AboutMePage />} />
-              <Route path="*" element={<HomePage />} />
+              <Route path="*" element={<ServicesPage />} />
             </Routes>
           </main>
         </div>

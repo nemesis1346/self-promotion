@@ -1,0 +1,359 @@
+// Content for the services page, in English and French.
+// Facts come from Marco's CV. Prices are a DRAFT: they must be approved by
+// Marco before the site goes live (see PRICES_ARE_DRAFT below).
+
+export const PRICES_ARE_DRAFT = true;
+
+export const CONTACT = {
+  email: 'marco.maigua1346@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/marco-maigua-66822584/',
+  github: 'https://github.com/nemesis1346',
+  medium: 'https://medium.com/@nemesis1346',
+  cv: 'https://storage.cloud.google.com/cms-personal.appspot.com/documents/Marco-Maigua-v2-english-2026.pdf',
+};
+
+const en = {
+  langLabel: 'EN',
+  nav: {
+    services: 'Services',
+    prices: 'Prices',
+    about: 'About',
+    faq: 'FAQ',
+    contact: 'Contact',
+    projects: 'Projects',
+    blog: 'Blog',
+    cta: 'Book a free call',
+  },
+  hero: {
+    eyebrow: 'Freelance software engineer · Montreal · Remote',
+    title: 'Secure logins, useful AI agents and working code,',
+    titleAccent: 'built by one engineer you can talk to.',
+    lead:
+      'I help companies set up Auth0 single sign-on, automate repetitive work with AI agents, and ship full-stack and blockchain products. Over 10 years in software, MSc in Computer Science.',
+    primary: 'Describe your project',
+    secondary: 'See the prices',
+    tags: ['Auth0 · SSO · MFA', 'AI agents · MCP', 'Solidity · Solana', 'React · Node.js · Python'],
+  },
+  services: {
+    title: 'What I can do for you',
+    subtitle: 'Four kinds of work, each based on projects I have delivered for employers and clients.',
+    includedLabel: 'What is included',
+    fromLabel: 'from',
+    items: [
+      {
+        id: 'ai',
+        kicker: 'Automate',
+        title: 'AI automation and agents',
+        tagline: 'The task your team repeats every week, done by an agent you can check.',
+        description:
+          'Agentic workflows connected to the tools you already use (Google Sheets, Docs, Gmail and others through MCP connectors), scheduled agent runs, and a human approval step before anything is sent or changed. Chatbots that answer from your own documents (RAG).',
+        included: [
+          'Mapping of one workflow and what can be automated',
+          'Agent set up with MCP connectors to your tools',
+          'Scheduled runs with human-in-the-loop approval',
+          'Written instructions to control cost and behaviour',
+          'Handover session for your team',
+        ],
+        stack: 'Claude Code · CrewAI · Ollama · RAG · MCP · Next.js',
+        priceKey: 'ai',
+      },
+      {
+        id: 'auth0',
+        kicker: 'Secure',
+        title: 'Auth0 and identity (IAM)',
+        tagline: 'Single sign-on and MFA that your users and your auditors are happy with.',
+        description:
+          'Auth0 set-up and changes: SSO with OIDC and SAML, MFA flows, Auth0 Actions, custom Universal Login, organizations and JWT claims. Tenants managed as code with Terraform and deployed through CI/CD to DEV, QA and PROD. Migrations of SAML users to OIDC.',
+        included: [
+          'Review of your current login flows and tenants',
+          'SSO (OIDC / SAML) and MFA configuration',
+          'Auth0 Actions and custom Universal Login',
+          'Terraform for clients, resource servers and tenant settings',
+          'CI/CD pipeline and documentation',
+        ],
+        stack: 'Auth0 · OIDC · SAML · MFA · JWT · Terraform · Node.js · GitHub Actions',
+        priceKey: 'auth0',
+      },
+      {
+        id: 'blockchain',
+        kicker: 'Build on-chain',
+        title: 'Blockchain development',
+        tagline: 'Smart contracts and crypto integrations, tested before they touch real funds.',
+        description:
+          'Solidity smart contracts (ERC-20, ERC-721) with OpenZeppelin, tested with Hardhat or Truffle. Solana and Ethereum integrations, DEX data (Orca, Meteora, Raydium), wallet front ends with MetaMask, and crypto platform integrations such as Fireblocks, Kraken and CoinGecko.',
+        included: [
+          'Contract design and implementation in Solidity',
+          'Automated tests on a local chain and testnet',
+          'Code review of existing contracts',
+          'Web3 front end or back-end integration',
+          'Deployment support and handover',
+        ],
+        stack: 'Solidity · Ethereum · Solana · OpenZeppelin · Hardhat · Ethers.js · Fireblocks',
+        priceKey: 'blockchain',
+      },
+      {
+        id: 'fullstack',
+        kicker: 'Build',
+        title: 'Full-stack web and mobile apps',
+        tagline: 'The internal tool or product no off-the-shelf software sells.',
+        description:
+          'Web and mobile applications in TypeScript, React, Next.js, React Native and Node.js, or Python back ends. REST APIs with Swagger docs, PostgreSQL and MongoDB, Docker and AWS deployment, CI/CD pipelines.',
+        included: [
+          'Scope and architecture written down before coding',
+          'Front end, back end and database',
+          'Automated tests and CI/CD',
+          'Deployment on AWS or your hosting',
+          'Source code and documentation handed over',
+        ],
+        stack: 'TypeScript · React · Next.js · React Native · Node.js · Python · AWS · Docker',
+        priceKey: 'fullstack',
+      },
+    ],
+  },
+  prices: {
+    title: 'Clear prices, step by step',
+    subtitle: 'The first call is free. The exact scope and price are agreed in writing before any work starts.',
+    draftBanner: 'DRAFT PRICES — not approved yet. Marco needs to confirm or change these before publishing.',
+    note:
+      'Prices in Canadian dollars, before taxes (GST/QST added where applicable). "From" prices are for a small, well-defined scope; larger projects are quoted after the first call.',
+    steps: [
+      { key: 'call', name: 'First call', price: 'Free', unit: '', detail: '30 minutes to understand your need' },
+      { key: 'audit', name: 'Audit', price: '$750', unit: '', detail: 'Your current set-up reviewed, with a written plan', from: true },
+      { key: 'ai', name: 'AI automation', price: '$1,500', unit: '', detail: 'One workflow automated with an agent', from: true },
+      { key: 'auth0', name: 'Auth0 / SSO', price: '$3,000', unit: '', detail: 'SSO and MFA for one application', from: true },
+      { key: 'blockchain', name: 'Smart contract', price: '$4,000', unit: '', detail: 'One tested contract and integration', from: true },
+      { key: 'fullstack', name: 'Web app', price: '$6,000', unit: '', detail: 'A first version of your custom tool', from: true },
+      { key: 'support', name: 'Support', price: '$300', unit: '/month', detail: 'Monitoring, updates and small changes', from: true },
+    ],
+    hourly: 'Hourly consulting: from $95/hour.',
+  },
+  about: {
+    title: 'About me',
+    subtitle: 'One person, from the first call to the delivered code.',
+    paragraphs: [
+      'I am Marco Maigua, a software engineer based in Montreal. I hold an MSc in Computer Science from the University of Saskatchewan and a BSc in Electrical Engineering, and I have over 10 years of experience in software development.',
+      'I have worked in startups, large enterprises and consulting: Auth0 and SSO for a large financial institution, Auth0 Universal Login features at Okta, and technical lead on a full-stack crypto exchange platform. I work in English, French and Spanish.',
+    ],
+    experienceTitle: 'Recent experience',
+    experience: [
+      { when: '2026', who: 'Desjardins (contract)', what: 'Auth0 SSO with OIDC, SAML and MFA; Terraform deployments; Node.js services on OpenShift. Work done entirely in French.' },
+      { when: '2025 – 2026', who: 'Okta (contract)', what: 'Auth0 Universal Login middleware and authentication policies in Node.js.' },
+      { when: '2024 – 2025', who: 'ChainMyne', what: 'Tech lead and architect of a crypto exchange: Next.js, React, React Native, AWS, Fireblocks.' },
+      { when: '2024', who: 'Freelance', what: 'AI agents with CrewAI and Ollama for e-commerce chatbots; Solidity and Solana projects.' },
+      { when: '2021 – 2024', who: 'Anuvu', what: 'Python back end, Redis, AWS S3 and SQS, Jenkins CI/CD, Grafana and Prometheus.' },
+      { when: '2020 – 2021', who: 'DistrictM', what: 'React and Redux dashboard, Python with pytest, AWS Lambda and Athena.' },
+    ],
+    credentialsTitle: 'Credentials',
+    credentials: [
+      'MSc in Computer Science, University of Saskatchewan (thesis on digital asset distribution with Ethereum and Hyperledger Fabric)',
+      'BSc in Electrical Engineering, Universidad San Francisco de Quito',
+      'Over 10 years in software development',
+      'English, French and Spanish',
+    ],
+    cvLabel: 'Download my CV',
+  },
+  faq: {
+    title: 'Your questions',
+    items: [
+      {
+        q: 'How does a project start?',
+        a: 'With a free 30-minute call. Then I send a written scope and a fixed price or estimate. Nothing starts before you agree to it.',
+      },
+      {
+        q: 'Do you work remotely?',
+        a: 'Yes. I am based in Montreal (Eastern time) and work remotely with clients in Canada and elsewhere. Meetings in the Montreal area are possible.',
+      },
+      {
+        q: 'In which language can we work?',
+        a: 'English, French or Spanish, for meetings, documentation and code comments.',
+      },
+      {
+        q: 'Can you take over an existing Auth0 tenant or code base?',
+        a: 'Yes. Most of my identity work was on existing tenants and pipelines: I start with an audit, then propose changes step by step.',
+      },
+    ],
+  },
+  contact: {
+    title: 'Tell me about your project',
+    subtitle: 'A few lines are enough. The first call is free.',
+    emailCta: 'Send me an email',
+    mailSubject: 'Project enquiry',
+    mailBody: 'Hello Marco,\n\nMy project:\n\nTimeline:\n\n',
+    or: 'or find me on',
+  },
+  footer: '© {year} Marco Maigua · Montreal, Quebec',
+};
+
+const fr = {
+  langLabel: 'FR',
+  nav: {
+    services: 'Services',
+    prices: 'Tarifs',
+    about: 'À propos',
+    faq: 'Questions',
+    contact: 'Contact',
+    projects: 'Projets',
+    blog: 'Blogue',
+    cta: 'Appel gratuit',
+  },
+  hero: {
+    eyebrow: 'Ingénieur logiciel indépendant · Montréal · À distance',
+    title: 'Connexions sécurisées, agents IA utiles et code qui fonctionne,',
+    titleAccent: 'par un seul ingénieur à qui vous parlez directement.',
+    lead:
+      "J'aide les entreprises à mettre en place l'authentification unique (SSO) avec Auth0, à automatiser les tâches répétitives avec des agents IA, et à livrer des produits full-stack et blockchain. Plus de 10 ans en développement logiciel, maîtrise en informatique.",
+    primary: 'Décrivez votre projet',
+    secondary: 'Voir les tarifs',
+    tags: ['Auth0 · SSO · MFA', 'Agents IA · MCP', 'Solidity · Solana', 'React · Node.js · Python'],
+  },
+  services: {
+    title: 'Ce que je peux faire pour vous',
+    subtitle: 'Quatre types de mandats, chacun basé sur des projets livrés pour des employeurs et des clients.',
+    includedLabel: 'Ce qui est inclus',
+    fromLabel: 'dès',
+    items: [
+      {
+        id: 'ai',
+        kicker: 'Automatiser',
+        title: 'Automatisation et agents IA',
+        tagline: 'La tâche que votre équipe refait chaque semaine, confiée à un agent que vous pouvez vérifier.',
+        description:
+          "Des flux agentiques branchés sur vos outils (Google Sheets, Docs, Gmail et autres via des connecteurs MCP), des exécutions planifiées et une étape d'approbation humaine avant tout envoi ou modification. Des chatbots qui répondent à partir de vos propres documents (RAG).",
+        included: [
+          "Analyse d'un processus et de ce qui peut être automatisé",
+          'Agent configuré avec des connecteurs MCP vers vos outils',
+          'Exécutions planifiées avec approbation humaine',
+          'Instructions écrites pour contrôler les coûts et le comportement',
+          'Séance de transfert avec votre équipe',
+        ],
+        stack: 'Claude Code · CrewAI · Ollama · RAG · MCP · Next.js',
+        priceKey: 'ai',
+      },
+      {
+        id: 'auth0',
+        kicker: 'Sécuriser',
+        title: 'Auth0 et gestion des identités (IAM)',
+        tagline: "Une authentification unique et une MFA qui conviennent à vos utilisateurs comme à vos auditeurs.",
+        description:
+          "Mise en place et évolution d'Auth0 : SSO avec OIDC et SAML, flux MFA, Auth0 Actions, Universal Login personnalisé, organisations et claims JWT. Tenants gérés en code avec Terraform et déployés par CI/CD en DEV, QA et PROD. Migration d'utilisateurs SAML vers OIDC.",
+        included: [
+          'Revue de vos flux de connexion et de vos tenants',
+          'Configuration SSO (OIDC / SAML) et MFA',
+          'Auth0 Actions et Universal Login personnalisé',
+          'Terraform pour les clients, serveurs de ressources et paramètres du tenant',
+          'Pipeline CI/CD et documentation',
+        ],
+        stack: 'Auth0 · OIDC · SAML · MFA · JWT · Terraform · Node.js · GitHub Actions',
+        priceKey: 'auth0',
+      },
+      {
+        id: 'blockchain',
+        kicker: 'Construire on-chain',
+        title: 'Développement blockchain',
+        tagline: 'Contrats intelligents et intégrations crypto, testés avant de toucher de vrais fonds.',
+        description:
+          'Contrats intelligents Solidity (ERC-20, ERC-721) avec OpenZeppelin, testés avec Hardhat ou Truffle. Intégrations Solana et Ethereum, données de DEX (Orca, Meteora, Raydium), interfaces web3 avec MetaMask et intégrations de plateformes crypto comme Fireblocks, Kraken et CoinGecko.',
+        included: [
+          'Conception et développement du contrat en Solidity',
+          'Tests automatisés sur chaîne locale et testnet',
+          'Revue de code de contrats existants',
+          'Intégration web3 côté interface ou serveur',
+          'Accompagnement au déploiement et transfert',
+        ],
+        stack: 'Solidity · Ethereum · Solana · OpenZeppelin · Hardhat · Ethers.js · Fireblocks',
+        priceKey: 'blockchain',
+      },
+      {
+        id: 'fullstack',
+        kicker: 'Construire',
+        title: 'Applications web et mobiles full-stack',
+        tagline: "L'outil interne ou le produit qu'aucun logiciel du marché ne vend.",
+        description:
+          'Applications web et mobiles en TypeScript, React, Next.js, React Native et Node.js, ou back-ends Python. API REST documentées avec Swagger, PostgreSQL et MongoDB, déploiement Docker et AWS, pipelines CI/CD.',
+        included: [
+          'Périmètre et architecture rédigés avant de coder',
+          'Interface, back-end et base de données',
+          'Tests automatisés et CI/CD',
+          "Déploiement sur AWS ou chez votre hébergeur",
+          'Code source et documentation remis',
+        ],
+        stack: 'TypeScript · React · Next.js · React Native · Node.js · Python · AWS · Docker',
+        priceKey: 'fullstack',
+      },
+    ],
+  },
+  prices: {
+    title: 'Des tarifs clairs, étape par étape',
+    subtitle: 'Le premier appel est gratuit. Le périmètre exact et le prix sont fixés par écrit avant de commencer.',
+    draftBanner: 'TARIFS PROVISOIRES — pas encore approuvés. Marco doit les confirmer ou les modifier avant publication.',
+    note:
+      'Montants en dollars canadiens, avant taxes (TPS/TVQ en sus s’il y a lieu). Les prix « dès » visent un périmètre restreint et bien défini ; les projets plus larges sont chiffrés après le premier appel.',
+    steps: [
+      { key: 'call', name: 'Premier appel', price: 'Gratuit', unit: '', detail: '30 minutes pour comprendre votre besoin' },
+      { key: 'audit', name: 'Audit', price: '750 $', unit: '', detail: 'Votre situation analysée, avec un plan écrit', from: true },
+      { key: 'ai', name: 'Automatisation IA', price: '1 500 $', unit: '', detail: 'Un processus automatisé par un agent', from: true },
+      { key: 'auth0', name: 'Auth0 / SSO', price: '3 000 $', unit: '', detail: 'SSO et MFA pour une application', from: true },
+      { key: 'blockchain', name: 'Contrat intelligent', price: '4 000 $', unit: '', detail: 'Un contrat testé et son intégration', from: true },
+      { key: 'fullstack', name: 'Application web', price: '6 000 $', unit: '', detail: 'Une première version de votre outil', from: true },
+      { key: 'support', name: 'Suivi', price: '300 $', unit: '/mois', detail: 'Surveillance, mises à jour et petits changements', from: true },
+    ],
+    hourly: 'Consultation à l’heure : dès 95 $/h.',
+  },
+  about: {
+    title: 'À propos',
+    subtitle: 'Une seule personne, du premier appel au code livré.',
+    paragraphs: [
+      "Je suis Marco Maigua, ingénieur logiciel établi à Montréal. Je détiens une maîtrise en informatique de l'Université de la Saskatchewan et un baccalauréat en génie électrique, et j'ai plus de 10 ans d'expérience en développement logiciel.",
+      "J'ai travaillé en démarrage, en grande entreprise et en services-conseils : Auth0 et SSO pour une grande institution financière, fonctionnalités Auth0 Universal Login chez Okta, et responsable technique d'une plateforme d'échange de cryptomonnaies full-stack. Je travaille en français, en anglais et en espagnol.",
+    ],
+    experienceTitle: 'Expérience récente',
+    experience: [
+      { when: '2026', who: 'Desjardins (contrat)', what: 'SSO Auth0 avec OIDC, SAML et MFA ; déploiements Terraform ; services Node.js sur OpenShift. Travail entièrement en français.' },
+      { when: '2025 – 2026', who: 'Okta (contrat)', what: "Middleware Auth0 Universal Login et politiques d'authentification en Node.js." },
+      { when: '2024 – 2025', who: 'ChainMyne', what: "Responsable technique et architecte d'une plateforme d'échange crypto : Next.js, React, React Native, AWS, Fireblocks." },
+      { when: '2024', who: 'Travailleur autonome', what: 'Agents IA avec CrewAI et Ollama pour des chatbots de commerce en ligne ; projets Solidity et Solana.' },
+      { when: '2021 – 2024', who: 'Anuvu', what: 'Back-end Python, Redis, AWS S3 et SQS, CI/CD Jenkins, Grafana et Prometheus.' },
+      { when: '2020 – 2021', who: 'DistrictM', what: 'Tableau de bord React et Redux, Python avec pytest, AWS Lambda et Athena.' },
+    ],
+    credentialsTitle: 'Formation et atouts',
+    credentials: [
+      "Maîtrise en informatique, Université de la Saskatchewan (mémoire sur la distribution d'actifs numériques avec Ethereum et Hyperledger Fabric)",
+      'Baccalauréat en génie électrique, Universidad San Francisco de Quito',
+      "Plus de 10 ans d'expérience en développement logiciel",
+      'Français, anglais et espagnol',
+    ],
+    cvLabel: 'Télécharger mon CV',
+  },
+  faq: {
+    title: 'Vos questions',
+    items: [
+      {
+        q: 'Comment commence un projet ?',
+        a: "Par un appel gratuit de 30 minutes. Je vous envoie ensuite un périmètre écrit et un prix fixe ou une estimation. Rien ne commence sans votre accord.",
+      },
+      {
+        q: 'Travaillez-vous à distance ?',
+        a: "Oui. Je suis à Montréal (heure de l'Est) et je travaille à distance avec des clients au Canada et ailleurs. Des rencontres dans la région de Montréal sont possibles.",
+      },
+      {
+        q: 'Dans quelle langue peut-on travailler ?',
+        a: 'Français, anglais ou espagnol, pour les rencontres, la documentation et le code.',
+      },
+      {
+        q: 'Pouvez-vous reprendre un tenant Auth0 ou un code existant ?',
+        a: "Oui. La plupart de mes mandats en identité portaient sur des tenants et des pipelines existants : je commence par un audit, puis je propose les changements étape par étape.",
+      },
+    ],
+  },
+  contact: {
+    title: 'Parlez-moi de votre projet',
+    subtitle: 'Quelques lignes suffisent. Le premier appel est gratuit.',
+    emailCta: 'Écrivez-moi',
+    mailSubject: 'Demande de projet',
+    mailBody: 'Bonjour Marco,\n\nMon projet :\n\nÉchéancier :\n\n',
+    or: 'ou retrouvez-moi sur',
+  },
+  footer: '© {year} Marco Maigua · Montréal, Québec',
+};
+
+export const CONTENT = { en, fr };
